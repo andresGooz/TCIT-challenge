@@ -16,7 +16,7 @@ class PostController {
         }
     }
 
-    async getByName() {
+    async getByName(req, res) {
         const posts = await postService.getByName(req.params.name);
         if (posts) {
             res.json(posts);
