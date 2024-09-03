@@ -20,7 +20,7 @@ class PostRepository {
     }
 
     async getByName(name) {
-        const data = await db.oneOrNone('SELECT * FROM your_schema_name.post WHERE name = $1', [name]);
+        const data = await db.any('SELECT * FROM your_schema_name.post WHERE name = $1', [name]);
         return data;
     }
 
