@@ -10,8 +10,8 @@ const Post = require('../models/post.model');
 
 class PostRepository {
     async getAll() {
-        const data = await db.any('SELECT * FROM users');
-        return data.map(row => new Post(row.id, row.name, row.email));
+        const data = await db.any('SELECT * FROM your_schema_name.post');
+        return data;
     }
 
     async getById(id) {

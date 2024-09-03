@@ -1,5 +1,6 @@
 const postService = require('../service/postService');
 
+
 class PostController {
     async getAll(req, res) {
         const users = await postService.getAll();
