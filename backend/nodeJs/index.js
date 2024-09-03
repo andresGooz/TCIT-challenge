@@ -14,6 +14,7 @@ checkValidityPluggin(PostController, PostControllerInterface);
 
 app.get('/posts', (req, res) => PostController.getAll(req, res));
 app.get('/posts/:id', (req, res) => PostController.getById(req, res));
+app.get('/posts/:name', (req, res) => PostController.getByName(req, res));
 app.post('/posts', (req, res) => PostController.create(req, res));
 app.put('/posts/:id', (req, res) => PostController.update(req, res));
 app.delete('/posts/:id', (req, res) => PostController.delete(req, res));

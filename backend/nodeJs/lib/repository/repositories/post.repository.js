@@ -15,11 +15,13 @@ class PostRepository {
     }
 
     async getById(id) {
-        const row = await db.oneOrNone('SELECT * FROM users WHERE id = $1', [id]);
-        if (row) {
-            return new Post(row.id, row.name, row.email);
-        }
-        return null;
+        const data = await db.oneOrNone('SELECT * FROM your_schema_name.post WHERE id = $1', [id]);
+        return data;
+    }
+
+    async getByName(name) {
+        const data = await db.oneOrNone('SELECT * FROM your_schema_name.post WHERE name = $1', [name]);
+        return data;
     }
 
     async create(user) {

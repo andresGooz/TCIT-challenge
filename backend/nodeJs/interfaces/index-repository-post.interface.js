@@ -3,6 +3,7 @@ const RepositoryPostInterface = {
     delete: function () {}, 
     getAll: function () {},
     getById: function () {}, 
+    getByName: function () {},
     update: function () {}, 
 };
 

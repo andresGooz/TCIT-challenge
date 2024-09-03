@@ -9,6 +9,10 @@ class PostService {
         return postRepository.getById(id);
     }
 
+    getByName(name) {
+        return postRepository.getByName(name);
+    }
+
     create(user) {
         return postRepository.create(user);
     }
