@@ -12,11 +12,11 @@ const PostControllerInterface = require('./interfaces/index-repository-post.inte
 const checkValidityPluggin = require('./helpers/checkValidityPluggin');
 checkValidityPluggin(PostController, PostControllerInterface);
 
-app.get('/posts', (req, res) => PostController.getAllPosts(req, res));
-app.get('/posts/:id', (req, res) => PostController.getPostById(req, res));
-app.post('/posts', (req, res) => PostController.createPost(req, res));
-app.put('/posts/:id', (req, res) => PostController.updatePost(req, res));
-app.delete('/posts/:id', (req, res) => PostController.deletePost(req, res));
+app.get('/posts', (req, res) => PostController.getAll(req, res));
+app.get('/posts/:id', (req, res) => PostController.getById(req, res));
+app.post('/posts', (req, res) => PostController.create(req, res));
+app.put('/posts/:id', (req, res) => PostController.update(req, res));
+app.delete('/posts/:id', (req, res) => PostController.delete(req, res));
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
