@@ -25,28 +25,36 @@ class PostRepository {
     }
 
     async create(user) {
-        const { name, email } = user;
-        const row = await db.one(
-            'INSERT INTO users(name, email) VALUES($1, $2) RETURNING id, name, email',
-            [name, email]
+        const { name, description } = user;
+        const data = await db.one(
+            `INSERT INTO your_schema_name.post (name, description) 
+             VALUES ($1, $2) 
+             RETURNING *`,
+            [name, description]
         );
-        return new Post(row.id, row.name, row.email);
+        return data;
     }
 
     async update(id, user) {
-        const { name, email } = user;
-        const row = await db.oneOrNone(
-            'UPDATE users SET name = $1, email = $2 WHERE id = $3 RETURNING id, name, email',
-            [name, email, id]
+        const { name, description } = user;
+        const data = await db.oneOrNone(
+            `UPDATE your_schema_name.post 
+             SET name = $1, description = $2 
+             WHERE id = $3 
+             RETURNING *`,
+            [name, description, id]
         );
-        if (row) {
-            return new Post(row.id, row.name, row.email);
-        }
-        return null;
+        return data;
     }
 
     async delete(id) {
-        return await db.none('DELETE FROM users WHERE id = $1', [id]);
+        const data = await db.oneOrNone(
+            `DELETE FROM your_schema_name.post 
+             WHERE id = $1 
+             RETURNING *`,
+            [id]
+        );
+        return data;
     }
 }
 
