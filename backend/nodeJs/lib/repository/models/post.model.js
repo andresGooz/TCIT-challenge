@@ -1,7 +1,7 @@
 class Post {
     constructor(name, description) {
-      this.name = url;
-      this.description = speechPath;
+      this.name = name;
+      this.description = description;
     }
   }
   
