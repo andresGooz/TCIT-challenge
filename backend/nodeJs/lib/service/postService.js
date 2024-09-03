@@ -2,23 +2,23 @@ const postRepository = require('../repository/repositories/post.repository');
 
 class PostService {
     getAll() {
-        return postRepository.getAllUsers();
+        return postRepository.getAll();
     }
 
     getById(id) {
-        return postRepository.getUserById(id);
+        return postRepository.getById(id);
     }
 
     create(user) {
-        return postRepository.createUser(user);
+        return postRepository.create(user);
     }
 
     update(id, user) {
-        return postRepository.updateUser(id, user);
+        return postRepository.update(id, user);
     }
 
     delete(id) {
-        return postRepository.deleteUser(id);
+        return postRepository.delete(id);
     }
 }
 
