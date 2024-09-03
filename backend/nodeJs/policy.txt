@@ -1,0 +1,1 @@
+política #1 => Usar tests para todo. TDD.
