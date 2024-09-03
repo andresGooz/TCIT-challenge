@@ -3,16 +3,16 @@ const postService = require('../service/postService');
 
 class PostController {
     async getAll(req, res) {
-        const users = await postService.getAll();
-        res.json(users);
+        const posts = await postService.getAll();
+        res.json(posts);
     }
 
     async getById(req, res) {
-        const user = await postService.getById(req.params.id);
-        if (user) {
-            res.json(user);
+        const post = await postService.getById(req.params.id);
+        if (post) {
+            res.json(post);
         } else {
-            res.status(404).send('User not found');
+            res.status(404).send('post not found');
         }
     }
 
@@ -27,16 +27,16 @@ class PostController {
     }
 
     async create(req, res) {
-        const user = await postService.create(req.body);
-        res.status(201).json(user);
+        const post = await postService.create(req.body);
+        res.status(201).json(post);
     }
 
     async update(req, res) {
-        const user = await postService.update(req.params.id, req.body);
-        if (user) {
-            res.json(user);
+        const post = await postService.update(req.params.id, req.body);
+        if (post) {
+            res.json(post);
         } else {
-            res.status(404).send('User not found');
+            res.status(404).send('post not found');
         }
     }
 

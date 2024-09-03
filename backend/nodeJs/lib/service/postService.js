@@ -13,12 +13,12 @@ class PostService {
         return postRepository.getByName(name);
     }
 
-    create(user) {
-        return postRepository.create(user);
+    create(post) {
+        return postRepository.create(post);
     }
 
-    update(id, user) {
-        return postRepository.update(id, user);
+    update(id, post) {
+        return postRepository.update(id, post);
     }
 
     delete(id) {
