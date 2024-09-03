@@ -1,7 +1,9 @@
 const RepositoryPostInterface = {
-    create: function () { },
-    get: function () { },
-    delete: function () { },
+    create: function () {},
+    delete: function () {}, 
+    getAll: function () {},
+    getById: function () {}, 
+    update: function () {}, 
 };
 
 module.exports = RepositoryPostInterface;
