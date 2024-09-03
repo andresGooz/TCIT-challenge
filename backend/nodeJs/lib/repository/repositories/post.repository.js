@@ -24,8 +24,8 @@ class PostRepository {
         return data;
     }
 
-    async create(user) {
-        const { name, description } = user;
+    async create(post) {
+        const { name, description } = post;
         const data = await db.one(
             `INSERT INTO your_schema_name.post (name, description) 
              VALUES ($1, $2) 
@@ -35,8 +35,8 @@ class PostRepository {
         return data;
     }
 
-    async update(id, user) {
-        const { name, description } = user;
+    async update(id, post) {
+        const { name, description } = post;
         const data = await db.oneOrNone(
             `UPDATE your_schema_name.post 
              SET name = $1, description = $2 
