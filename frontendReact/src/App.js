@@ -1,9 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import NotFound from './views/error/404';
-import Layout from "./components/layout/layout";
-import Posts from "./views/posts/posts";
-import CreatePost from "./views/posts/post_create";
-import PostDetail from "./views/posts/post_detail";
+import NotFound from './components/structure/views/error/404';
+import Layout from "./components/structure/layout/layout";
+import CreatePost from "./components/structure/form/postCreate";
+import DeletePost from "./components/structure/form/postDelete";
+import PostDetail from "./components/structure/filter/postDetail";
+import Posts from "./components/structure/lists/posts";
 
 
 export default function App() {
@@ -11,10 +12,12 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Posts />} />
-          <Route path="/posts" element={<Posts />} />
-          <Route path="/posts/create" element={<CreatePost />} />
-          <Route path="/post/:id" element={<PostDetail />} />
+          <Route index element={<CreatePost />} /> {/* formulario */}
+          <Route index path="/posts/create" element={<CreatePost />} /> {/* formulario */}
+          <Route index path="/posts/delete" element={<DeletePost />} /> {/* formulario */}
+          <Route path="/post/:id" element={<PostDetail />} /> {/* filtro */}
+          <Route path="/post/name/:name" element={<PostDetail />} /> {/* filtro */}
+          <Route path="/posts" element={<Posts />} /> {/* lista */}
           <Route path="/NotFound" element={<NotFound />} />
           <Route path="*" element={<NotFound />} />
         </Route>

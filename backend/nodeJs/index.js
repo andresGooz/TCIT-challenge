@@ -1,15 +1,17 @@
 
 const express = require('express')
 const app = express();
+var cors = require('cors')
+app.use(cors())
 const port = 3000;
 app.use(express.json());
 const dotenv = require('dotenv');
 dotenv.config({ path: `${__dirname}/.env` });
 const PostController = require('./lib/controller/postController');
-const PostControllerInterface = require('./interfaces/index-repository-post.interface');
+const RepositoryPostInterface = require('./interfaces/index-repository-post.interface');
 
 const checkValidityPluggin = require('./helpers/checkValidityPluggin');
-checkValidityPluggin(PostController, PostControllerInterface);
+checkValidityPluggin(PostController, RepositoryPostInterface);
 
 
 app.get('/posts', (req, res) => PostController.getAll(req, res));//OK
