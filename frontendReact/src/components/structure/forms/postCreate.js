@@ -28,13 +28,11 @@ function CreatePost() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("OKAAAAA");
     const postData = {
       name: name,
       description: description
     };
     try {
-      console.log("OOOOOOOOOKKKKKKKK");
       const controller = await new CreatePostController();
       const response = await controller.createPost(postData);
       if (!response.ok) {

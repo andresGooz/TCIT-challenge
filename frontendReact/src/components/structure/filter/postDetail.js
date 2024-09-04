@@ -3,47 +3,31 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { MDCDataTable } from '@material/data-table';
 import '@material/data-table/dist/mdc.data-table.css';
 import '@material/theme/dist/mdc.theme.css';
-import env from "react-dotenv";
+import GetPostController from '../../behavior/post/getPost';  // Importa el controlador
 
 function PostDetail() {
   const { id, name } = useParams();
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [url, setUrl] = useState(null);
   const dataTableRef = useRef(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (id) {
-      setUrl(`${env.BACKEND_API_DOMAIN_URL}/posts/id/${id}/`);
-    } else if (name) {
-      setUrl(`${env.BACKEND_API_DOMAIN_URL}/posts/name/${name}/`);
-    } else {
-      navigate(`/NotFound`);
-    }
+    const getPostController = new GetPostController();
+    const fetchPost = async () => {
+      try {
+        const data = await getPostController.getPost(id, name);
+        setPost(data);
+        setLoading(false);
+      } catch (error) {
+        setError(error);
+        setLoading(false);
+        navigate(`/NotFound`);
+      }
+    };
+    fetchPost();
   }, [id, name, navigate]);
-
-  useEffect(() => {
-    if (url) {
-      setLoading(true);
-      fetch(url)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.json();
-        })
-        .then(data => {
-          setPost(data);
-          setLoading(false);
-        })
-        .catch(error => {
-          setError(error);
-          setLoading(false);
-        });
-    }
-  }, [url]);
 
   useEffect(() => {
     if (dataTableRef.current) {
@@ -55,9 +39,13 @@ function PostDetail() {
     return <div>Loading...</div>;
   }
 
-  if (error || !post || !post.id) {
+  if (error) {
+    return <div>Error loading post</div>;
+  }
+
+  if (!post || !post.id) {
     navigate(`/NotFound`);
-    return null; // Important to prevent further rendering
+    return null;
   }
 
   return (

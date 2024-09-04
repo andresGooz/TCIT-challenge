@@ -3,10 +3,7 @@ import env from "react-dotenv";
 
 
 class CreatePostController {
-    constructor(){
-        console.log("IIIIIIIIIKKKKKKK");
-        console.log(env.BACKEND_API_USERNAME);
-    }
+    constructor(){}
     async createPost(postData){
         const username = env.BACKEND_API_USERNAME;
         const password = env.BACKEND_API_PASSWORD;
@@ -21,5 +18,4 @@ class CreatePostController {
         });
     }
 }
-//module.exports = CreatePostController;
 export default CreatePostController;
