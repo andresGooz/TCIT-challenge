@@ -4,7 +4,7 @@ import { MDCDataTable } from '@material/data-table';
 import '@material/data-table/dist/mdc.data-table.css';
 import '@material/theme/dist/mdc.theme.css';
 import GetPostController from '../../behavior/post/getPost';  // Importa el controlador
-
+import DeletePost from '../../structure/forms/postDelete';
 function PostDetail() {
   const { id, name } = useParams();
   const [post, setPost] = useState(null);
@@ -49,34 +49,39 @@ function PostDetail() {
   }
 
   return (
-    <div className="mdc-data-table" ref={dataTableRef}>
-      <div className="mdc-data-table__table-container">
-        <table className="mdc-data-table__table" aria-label="">
-          <thead>
-            <tr className="mdc-data-table__header-row">
-              <th className="mdc-data-table__header-cell" role="columnheader" scope="col">Field</th>
-              <th className="mdc-data-table__header-cell" role="columnheader" scope="col">Value</th>
-            </tr>
-          </thead>
-          <tbody className="mdc-data-table__content">
-            <tr className="mdc-data-table__row">
-              <th className="mdc-data-table__header-cell" scope="row">Id</th>
-              <td className="mdc-data-table__cell">{post.id}</td>
-            </tr>
-            <tr className="mdc-data-table__row">
-              <th className="mdc-data-table__header-cell" scope="row">Title</th>
-              <td className="mdc-data-table__cell">{post.title}</td>
-            </tr>
-            <tr className="mdc-data-table__row">
-              <th className="mdc-data-table__header-cell" scope="row">Content</th>
-              <td className="mdc-data-table__cell">{post.content}</td>
-            </tr>
-            <tr className="mdc-data-table__row">
-              <th className="mdc-data-table__header-cell" scope="row">Author</th>
-              <td className="mdc-data-table__cell">{post.author}</td>
-            </tr>
-          </tbody>
-        </table>
+    <div>
+      <div className="mdc-data-table" ref={dataTableRef}>
+        <div className="mdc-data-table__table-container">
+          <table className="mdc-data-table__table" aria-label="">
+            <thead>
+              <tr className="mdc-data-table__header-row">
+                <th className="mdc-data-table__header-cell" role="columnheader" scope="col">Field</th>
+                <th className="mdc-data-table__header-cell" role="columnheader" scope="col">Value</th>
+              </tr>
+            </thead>
+            <tbody className="mdc-data-table__content">
+              <tr className="mdc-data-table__row">
+                <th className="mdc-data-table__header-cell" scope="row">Id</th>
+                <td className="mdc-data-table__cell">{post.id}</td>
+              </tr>
+              <tr className="mdc-data-table__row">
+                <th className="mdc-data-table__header-cell" scope="row">Title</th>
+                <td className="mdc-data-table__cell">{post.title}</td>
+              </tr>
+              <tr className="mdc-data-table__row">
+                <th className="mdc-data-table__header-cell" scope="row">Content</th>
+                <td className="mdc-data-table__cell">{post.content}</td>
+              </tr>
+              <tr className="mdc-data-table__row">
+                <th className="mdc-data-table__header-cell" scope="row">Author</th>
+                <td className="mdc-data-table__cell">{post.author}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <DeletePost postId={post.id} />
       </div>
     </div>
   );
