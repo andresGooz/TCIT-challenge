@@ -11,9 +11,9 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Posts />} />
+          <Route index element={<CreatePost />} />
+          <Route index path="/posts/create" element={<CreatePost />} />
           <Route path="/posts" element={<Posts />} />
-          <Route path="/posts/create" element={<CreatePost />} />
           <Route path="/post/:id" element={<PostDetail />} />
           <Route path="/NotFound" element={<NotFound />} />
           <Route path="*" element={<NotFound />} />

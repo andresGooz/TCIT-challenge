@@ -10,11 +10,11 @@ const Layout = () => {
     <>
       <nav>
         <ul>
-          <li>
-            <Link to="/">
+        <li>
+            <Link to="/posts/create">
               <md-filled-button>
-                <md-icon class="material-icons">home</md-icon>
-                Home
+                <md-icon class="material-icons">create</md-icon>
+                Create Post
               </md-filled-button>
             </Link>
           </li>
@@ -23,14 +23,6 @@ const Layout = () => {
               <md-filled-button>
                 <md-icon class="material-icons">article</md-icon>
                 Posts
-              </md-filled-button>
-            </Link>
-          </li>
-          <li>
-            <Link to="/posts/create">
-              <md-filled-button>
-                <md-icon class="material-icons">create</md-icon>
-                Create Post
               </md-filled-button>
             </Link>
           </li>
