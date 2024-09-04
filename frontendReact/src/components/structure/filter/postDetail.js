@@ -4,7 +4,7 @@ import { MDCDataTable } from '@material/data-table';
 import '@material/data-table/dist/mdc.data-table.css';
 import '@material/theme/dist/mdc.theme.css';
 import GetPostController from '../../behavior/post/getPost';  // Importa el controlador
-import DeletePost from '../../structure/forms/postDelete';
+import DeletePost from '../../structure/form/postDelete';
 function PostDetail() {
   const { id, name } = useParams();
   const [post, setPost] = useState(null);

@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NotFound from './components/structure/views/error/404';
 import Layout from "./components/structure/layout/layout";
-import CreatePost from "./components/structure/forms/postCreate";
-import DeletePost from "./components/structure/forms/postDelete";
+import CreatePost from "./components/structure/form/postCreate";
+import DeletePost from "./components/structure/form/postDelete";
 import PostDetail from "./components/structure/filter/postDetail";
 import Posts from "./components/structure/lists/posts";
 
