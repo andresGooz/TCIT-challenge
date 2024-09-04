@@ -5,6 +5,7 @@ import '@material/web/button/filled-button';
 import '@material/web/icon/icon';
 import 'material-icons/iconfont/material-icons.css';
 import env from "react-dotenv";
+import CreatePostController from '../../behavior/post/createPost';
 
 
 function CreatePost() {
@@ -27,22 +28,15 @@ function CreatePost() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("OKAAAAA");
     const postData = {
       name: name,
       description: description
     };
-    const username = env.BACKEND_API_USERNAME;
-    const password = env.BACKEND_API_PASSWORD;
-    const basicAuth = 'Basic ' + btoa(`${username}:${password}`);
     try {
-      const response = await fetch(env.BACKEND_API_DOMAIN_URL+'/posts', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': basicAuth
-        },
-        body: JSON.stringify(postData),
-      });
+      console.log("OOOOOOOOOKKKKKKKK");
+      const controller = await new CreatePostController();
+      const response = await controller.createPost(postData);
       if (!response.ok) {
         throw new Error('Failed to create post');
       }
@@ -63,7 +57,7 @@ function CreatePost() {
           <md-outlined-text-field
               ref={nameRef}
               id="name"
-              label="Título"
+              label="Nombre"
               value={name}
               required
           ></md-outlined-text-field>
@@ -72,7 +66,7 @@ function CreatePost() {
           <md-outlined-text-field
               ref={descriptionRef}
               id="description"
-              label="Contenido"
+              label="Descripción"
               value={description}
               textarea
               required

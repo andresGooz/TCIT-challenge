@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import NotFound from './components/views/error/404';
-import Layout from "./components/layout/layout";
-import CreatePost from "./components/forms/post_create";
-import PostDetail from "./components/filter/post_detail";
-import Posts from "./components/lists/posts";
+import NotFound from './components/structure/views/error/404';
+import Layout from "./components/structure/layout/layout";
+import CreatePost from "./components/structure/forms/postCreate";
+import PostDetail from "./components/structure/filter/postDetail";
+import Posts from "./components/structure/lists/posts";
 
 
 export default function App() {
