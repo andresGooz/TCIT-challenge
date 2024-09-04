@@ -31,7 +31,9 @@ function Posts() {
         {posts.map(post => (
                 <li key={post.id} class="mdc-list-item" tabindex="0">
                   <Link to={`/post/${post.id}`}>
-                  <span class="mdc-list-item__text">{post.name}</span>
+                  <span class="mdc-list-item__text">{post.id}</span><br/>
+                  <span class="mdc-list-item__text">{post.name}</span><br/>
+                  <span class="mdc-list-item__text">{post.description}</span>
                   </Link>
                 </li>
         ))}
