@@ -7,17 +7,27 @@ import env from "react-dotenv";
 
 
 function PostDetail() {
-  const { id } = useParams();
+  const { id, name } = useParams();
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const dataTableRef = useRef(null);
+  let url = null;
 
+  if (id) {
+    url = `${env.BACKEND_API_DOMAIN_URL}/posts/id/${id}/`;
+  } else if (name) {
+    url = `${env.BACKEND_API_DOMAIN_URL}/posts/name/${name}/`;
+  } else {
+    throw new Error("Neither id nor name is provided.");
+  }
   const navigate = useNavigate();
+  if (!url)
+    throw new Error("Url invalid");
 
   useEffect(() => {
     setLoading(true);
-    fetch(env.BACKEND_API_DOMAIN_URL+`/posts/id/${id}/`)
+    fetch(url)
       .then(response => {
         if (!response.ok) {
           navigate(`/NotFound`);
