@@ -17,7 +17,7 @@ function PostDetail() {
 
   useEffect(() => {
     setLoading(true);
-    fetch(env.BACKEND_API_DOMAIN_URL+`/api/posts/${id}/`)
+    fetch(env.BACKEND_API_DOMAIN_URL+`/posts/id/${id}/`)
       .then(response => {
         if (!response.ok) {
           navigate(`/NotFound`);

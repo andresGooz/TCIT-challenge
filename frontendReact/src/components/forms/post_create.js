@@ -8,23 +8,18 @@ import env from "react-dotenv";
 
 
 function CreatePost() {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [author, setAuthor] = useState('');
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
 
-  const titleRef = useRef();
-  const contentRef = useRef();
-  const authorRef = useRef();
+  const nameRef = useRef();
+  const descriptionRef = useRef();
 
   useEffect(() => {
-    if (titleRef.current) {
-      titleRef.current.addEventListener('input', (e) => setTitle(e.target.value));
+    if (nameRef.current) {
+      nameRef.current.addEventListener('input', (e) => setName(e.target.value));
     }
-    if (contentRef.current) {
-      contentRef.current.addEventListener('input', (e) => setContent(e.target.value));
-    }
-    if (authorRef.current) {
-      authorRef.current.addEventListener('input', (e) => setAuthor(e.target.value));
+    if (descriptionRef.current) {
+      descriptionRef.current.addEventListener('input', (e) => setDescription(e.target.value));
     }
   }, []);
 
@@ -33,16 +28,14 @@ function CreatePost() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const postData = {
-      title: title,
-      content: content,
-      author: author
+      name: name,
+      description: description
     };
     const username = env.BACKEND_API_USERNAME;
     const password = env.BACKEND_API_PASSWORD;
     const basicAuth = 'Basic ' + btoa(`${username}:${password}`);
     try {
-      const response = await fetch(env.BACKEND_API_DOMAIN_URL+'/api/posts/', {
-        
+      const response = await fetch(env.BACKEND_API_DOMAIN_URL+'/posts', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -53,9 +46,8 @@ function CreatePost() {
       if (!response.ok) {
         throw new Error('Failed to create post');
       }
-      setTitle('');
-      setContent('');
-      setAuthor('');
+      setName('');
+      setDescription('');
       const responseData = await response.json();
       navigate(`/post/${responseData.id}`);
     } catch (error) {
@@ -69,29 +61,20 @@ function CreatePost() {
       <form onSubmit={handleSubmit}>
         <div>
           <md-outlined-text-field
-              ref={titleRef}
-              id="title"
+              ref={nameRef}
+              id="name"
               label="Título"
-              value={title}
+              value={name}
               required
           ></md-outlined-text-field>
         </div>
         <div>
           <md-outlined-text-field
-              ref={contentRef}
-              id="content"
+              ref={descriptionRef}
+              id="description"
               label="Contenido"
-              value={content}
+              value={description}
               textarea
-              required
-          ></md-outlined-text-field>
-        </div>
-        <div>
-          <md-outlined-text-field
-              ref={authorRef}
-              id="author"
-              label="Autor"
-              value={author}
               required
           ></md-outlined-text-field>
         </div>
