@@ -6,7 +6,7 @@ function PostList({ posts }) {
     <ul className="mdc-list">
       {posts.map(post => (
         <li key={post.id} className="mdc-list-item" tabIndex="0">
-          <Link to={`/post/${post.id}`} onClick={() => console.log('ok')}>
+          <Link to={`/post/${post.id}`}>
             <span className="mdc-list-item__text">{post.id}</span><br />
             <span className="mdc-list-item__text">{post.name}</span><br />
             <span className="mdc-list-item__text">{post.description}</span>
