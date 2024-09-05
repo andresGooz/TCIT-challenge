@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { listPost, resetPost } from '../../../behavior/post/listPostSlicer';
+import { listPost, resetPost } from '../../behavior/post/listPostSlicer';
 import '@material/web/textfield/outlined-text-field';
 import '@material/web/button/filled-button';
 import '@material/web/icon/icon';
 import 'material-icons/iconfont/material-icons.css';
-import { Link } from 'react-router-dom';
-import LocalFilter from '../filter/localFilter';
+import LocalFilter from '../post/filter/localFilter';
+import PostList from '../post/list/getListPosts';
+
 
 function ListPost() {
   const dispatch = useDispatch();
@@ -35,24 +36,14 @@ function ListPost() {
       navigate(`/post/${post.id}`);
     }
   }, [status, post, dispatch, navigate]);
-
+  const handlePostClick = (postId) => {
+    console.log(postId);
+  };
   return (
     <div>
       <h2>Posts</h2>
-      <div>
-        <LocalFilter posts={posts} onFilteredPostsChange={setFilteredPosts} />
-      </div>
-      <ul className="mdc-list">
-        {filteredPosts.map(post => (
-          <li key={post.id} className="mdc-list-item" tabIndex="0">
-            <Link to={`/post/${post.id}`}>
-              <span className="mdc-list-item__text">{post.id}</span><br/>
-              <span className="mdc-list-item__text">{post.name}</span><br/>
-              <span className="mdc-list-item__text">{post.description}</span>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <LocalFilter posts={posts} onFilteredPostsChange={setFilteredPosts} />
+      <PostList posts={filteredPosts} onPostClick={handlePostClick} />
     </div>
   );
 }

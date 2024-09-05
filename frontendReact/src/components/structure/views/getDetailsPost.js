@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getDetailsPost, resetPost } from '../../../behavior/post/getDetailsPostSlicer';
+import { getDetailsPost, resetPost } from '../../behavior/post/getDetailsPostSlicer';
 import '@material/web/textfield/outlined-text-field';
 import '@material/web/button/filled-button';
 import '@material/web/icon/icon';
 import 'material-icons/iconfont/material-icons.css';
-import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import DeletePost from '../form/deletePost';
+import DeletePost from '../post/form/deletePost';
+import ItemDetail from '../post/list/itemDetail';
 
 
 function GetDetailsPost() {
@@ -41,19 +41,8 @@ function GetDetailsPost() {
     <>
     <div>
       <h2>Post detail</h2>
-      <ul className="mdc-list">
-        <li key={posts.id} className="mdc-list-item" tabIndex="0">
-          <Link to={`/post/${posts.id}`}>
-            <span className="mdc-list-item__text">{posts.id}</span><br/>
-            <span className="mdc-list-item__text">{posts.name}</span><br/>
-            <span className="mdc-list-item__text">{posts.description}</span>
-          </Link>
-          <div>
-            < DeletePost postId={posts.id} />
-          </div>
-        </li>
-      </ul>
-      
+      < ItemDetail post={posts} />
+      < DeletePost postId={posts.id} />
     </div>
     </>
   );
