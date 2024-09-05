@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { createPost, resetPost } from './createPostSlicer';
 import '@material/web/textfield/outlined-text-field';
 import '@material/web/button/filled-button';
 import '@material/web/icon/icon';
 import 'material-icons/iconfont/material-icons.css';
-import env from "react-dotenv";
-import CreatePostController from '../../behavior/post/createPost';
 
 
 function CreatePost() {
@@ -15,37 +15,33 @@ function CreatePost() {
   const nameRef = useRef();
   const descriptionRef = useRef();
 
-  useEffect(() => {
-    if (nameRef.current) {
-      nameRef.current.addEventListener('input', (e) => setName(e.target.value));
-    }
-    if (descriptionRef.current) {
-      descriptionRef.current.addEventListener('input', (e) => setDescription(e.target.value));
-    }
-  }, []);
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const { post, status, error } = useSelector((state) => state.post);
+
+  useEffect(() => {
+    if (status === 'succeeded' && post) {
+      setName('');
+      setDescription('');
+      dispatch(resetPost());
+      navigate(`/post/${post.id}`);
+    }
+  }, [status, post, dispatch, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const postData = {
-      name: name,
-      description: description
-    };
-    try {
-      const controller = await new CreatePostController();
-      const response = await controller.createPost(postData);
-      if (!response.ok) {
-        throw new Error('Failed to create post');
-      }
+    const postData = { name, description };
+    const resultAction = await dispatch(createPost(postData));
+  
+    if (createPost.fulfilled.match(resultAction)) {
       setName('');
       setDescription('');
-      const responseData = await response.json();
-      navigate(`/post/${responseData.id}`);
-    } catch (error) {
-      console.error('Error creating post:', error);
+      dispatch(resetPost());
+      navigate(`/post/${resultAction.payload.id}`);
     }
   };
+  
 
   return (
     <div>
