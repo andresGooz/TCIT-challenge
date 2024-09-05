@@ -35,18 +35,6 @@ function ListPost() {
     }
   }, [status, post, dispatch, navigate]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const resultData = await dispatch(listPost());
-    console.log(resultData);
-  
-    if (listPost.fulfilled.match(resultData)) {
-      setPosts(resultData.payload); // Actualiza el estado local con los posts
-      dispatch(resetPost());
-      navigate(`/post/${resultData.payload.id}`);
-    }
-  };
-
   return (
     <div>
       <h2>Posts</h2>
