@@ -38,7 +38,6 @@ function CreatePost() {
       navigate(`/post/${resultAction.payload.id}`);
     }
   };
-  
 
   return (
     <div>

@@ -39,18 +39,6 @@ function GetDetailsPost() {
     }
   }, [status, post, dispatch, navigate]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const resultData = await dispatch(getDetailsPost());
-    console.log(resultData);
-  
-    if (getDetailsPost.fulfilled.match(resultData)) {
-      setPosts(resultData.payload);
-      dispatch(resetPost());
-      navigate(`/post/${resultData.payload.id}`);
-    }
-  };
-
   return (
     <>
     <div>
