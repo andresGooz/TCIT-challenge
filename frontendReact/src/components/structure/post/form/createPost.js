@@ -3,7 +3,7 @@ import '@material/web/textfield/outlined-text-field';
 import '@material/web/button/filled-button';
 import '@material/web/icon/icon';
 import 'material-icons/iconfont/material-icons.css';
-import { createPost, resetPost } from '../../../behavior/post/createPostSlicer'; // Importa las acciones
+import { createPost, resetPost } from '../../../behavior/post/createPostSlicer';
 import {  useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
