@@ -17,8 +17,6 @@ export const getDetailsPost = createAsyncThunk(
   async ({ postId, postName}, { rejectWithValue }) => {
     try {
       const url = getPostUrl(postId, postName);
-      console.log("url: ");
-      console.log(url);
       const username = process.env.REACT_APP_BACKEND_API_USERNAME;
       const password = process.env.REACT_APP_BACKEND_API_PASSWORD;
       const basicAuth = 'Basic ' + btoa(`${username}:${password}`);
@@ -35,8 +33,6 @@ export const getDetailsPost = createAsyncThunk(
       }
 
       const data = await response.json();
-      console.log("data: ");
-      console.log(data);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
