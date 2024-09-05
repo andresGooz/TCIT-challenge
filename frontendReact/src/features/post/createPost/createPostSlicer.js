@@ -5,8 +5,6 @@ export const createPost = createAsyncThunk(
   'post/createPost',
   async (postData, { rejectWithValue }) => {
     try {
-      console.log("postData: ");
-      console.log(postData);
       const username = process.env.REACT_APP_BACKEND_API_USERNAME;
       const password = process.env.REACT_APP_BACKEND_API_PASSWORD;
       const basicAuth = 'Basic ' + btoa(`${username}:${password}`);
