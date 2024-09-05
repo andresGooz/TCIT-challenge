@@ -3,11 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { deletePost, resetDeletePost } from './deletePostSlicer';
 
+
 function DeletePost({ postId }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { status, error } = useSelector((state) => state.deletePost);
+  const { status, error } = useSelector((state) => state.postDelete);
 
   useEffect(() => {
     if (status === 'succeeded') {

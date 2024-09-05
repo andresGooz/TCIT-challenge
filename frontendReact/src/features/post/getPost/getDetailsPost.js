@@ -8,6 +8,7 @@ import '@material/web/icon/icon';
 import 'material-icons/iconfont/material-icons.css';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import DeletePost from '../../../features/post/deletePost/deletePost';
 
 
 function GetDetailsPost() {
@@ -53,19 +54,24 @@ function GetDetailsPost() {
   };
 
   return (
+    <>
     <div>
-      <h2>Posts</h2>
+      <h2>Post detail</h2>
       <ul className="mdc-list">
-      <li key={posts.id} className="mdc-list-item" tabIndex="0">
-    <Link to={`/post/${posts.id}`}>
-      <span className="mdc-list-item__text">{posts.id}</span><br/>
-      <span className="mdc-list-item__text">{posts.name}</span><br/>
-      <span className="mdc-list-item__text">{posts.description}</span>
-    </Link>
-  </li>
-
+        <li key={posts.id} className="mdc-list-item" tabIndex="0">
+          <Link to={`/post/${posts.id}`}>
+            <span className="mdc-list-item__text">{posts.id}</span><br/>
+            <span className="mdc-list-item__text">{posts.name}</span><br/>
+            <span className="mdc-list-item__text">{posts.description}</span>
+          </Link>
+          <div>
+            < DeletePost postId={posts.id} />
+          </div>
+        </li>
       </ul>
+      
     </div>
+    </>
   );
 }
 
