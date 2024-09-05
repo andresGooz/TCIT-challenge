@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { listPost, resetPost } from '../../behavior/post/listPostSlicer';
 import '@material/web/textfield/outlined-text-field';
 import '@material/web/button/filled-button';
@@ -12,8 +11,6 @@ import PostList from '../post/list/getListPosts';
 
 function ListPost() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { post, status, error } = useSelector((state) => state.post);
   const [posts, setPosts] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
 
@@ -30,12 +27,6 @@ function ListPost() {
     fetchPosts();
   }, [dispatch]);
 
-  useEffect(() => {
-    if (status === 'succeeded' && post) {
-      dispatch(resetPost());
-      navigate(`/post/${post.id}`);
-    }
-  }, [status, post, dispatch, navigate]);
   const handlePostClick = (postId) => {
     console.log(postId);
   };

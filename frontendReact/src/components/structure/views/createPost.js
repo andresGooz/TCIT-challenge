@@ -16,22 +16,10 @@ function CreatePost() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { post, status, error } = useSelector((state) => state.post);
-
-  useEffect(() => {
-    if (status === 'succeeded' && post) {
-      setName('');
-      setDescription('');
-      dispatch(resetPost());
-      navigate(`/post/${post.id}`);
-    }
-  }, [status, post, dispatch, navigate]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const postData = { name, description };
     const resultAction = await dispatch(createPost(postData));
-  
     if (createPost.fulfilled.match(resultAction)) {
       setName('');
       setDescription('');

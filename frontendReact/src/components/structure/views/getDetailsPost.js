@@ -14,8 +14,6 @@ import ItemDetail from '../post/list/itemDetail';
 function GetDetailsPost() {
   const { postId, postName } = useParams();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { post, status, error } = useSelector((state) => state.post);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -29,13 +27,6 @@ function GetDetailsPost() {
     };
     fetchPosts();
   }, [dispatch]);
-
-  useEffect(() => {
-    if (status === 'succeeded' && post) {
-      dispatch(resetPost());
-      navigate(`/post/${post.id}`);
-    }
-  }, [status, post, dispatch, navigate]);
 
   return (
     <>
