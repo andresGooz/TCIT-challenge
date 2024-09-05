@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+
 function LocalFilter({ posts, onFilteredPostsChange }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredPosts, setFilteredPosts] = useState(posts);
