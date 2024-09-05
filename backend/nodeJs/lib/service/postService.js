@@ -1,5 +1,6 @@
 const postRepository = require('../repository/repositories/post.repository');
 
+
 class PostService {
     getAll() {
         return postRepository.getAll();
