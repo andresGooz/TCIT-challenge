@@ -1,3 +1,4 @@
+/*
 import env from "react-dotenv";
 
 class GetPostController {
@@ -35,3 +36,4 @@ class GetPostController {
 }
 
 export default GetPostController;
+*/

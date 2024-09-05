@@ -1,51 +1,44 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { createPost, resetPost } from './createPostSlicer';
 import '@material/web/textfield/outlined-text-field';
 import '@material/web/button/filled-button';
 import '@material/web/icon/icon';
 import 'material-icons/iconfont/material-icons.css';
-import env from "react-dotenv";
-import CreatePostController from '../../behavior/post/createPost';
 
 
 function CreatePost() {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
 
-  const nameRef = useRef();
-  const descriptionRef = useRef();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { post, status, error } = useSelector((state) => state.post);
 
   useEffect(() => {
-    if (nameRef.current) {
-      nameRef.current.addEventListener('input', (e) => setName(e.target.value));
+    if (status === 'succeeded' && post) {
+      setName('');
+      setDescription('');
+      dispatch(resetPost());
+      navigate(`/post/${post.id}`);
     }
-    if (descriptionRef.current) {
-      descriptionRef.current.addEventListener('input', (e) => setDescription(e.target.value));
-    }
-  }, []);
-
-  const navigate = useNavigate();
+  }, [status, post, dispatch, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const postData = {
-      name: name,
-      description: description
-    };
-    try {
-      const controller = await new CreatePostController();
-      const response = await controller.createPost(postData);
-      if (!response.ok) {
-        throw new Error('Failed to create post');
-      }
+    const postData = { name, description };
+    const resultAction = await dispatch(createPost(postData));
+  
+    if (createPost.fulfilled.match(resultAction)) {
       setName('');
       setDescription('');
-      const responseData = await response.json();
-      navigate(`/post/${responseData.id}`);
-    } catch (error) {
-      console.error('Error creating post:', error);
+      dispatch(resetPost());
+      navigate(`/post/${resultAction.payload.id}`);
     }
   };
+  
 
   return (
     <div>
@@ -53,19 +46,19 @@ function CreatePost() {
       <form onSubmit={handleSubmit}>
         <div>
           <md-outlined-text-field
-              ref={nameRef}
               id="name"
               label="Nombre"
               value={name}
+              onInput={(e) => setName(e.target.value)}
               required
           ></md-outlined-text-field>
         </div>
         <div>
           <md-outlined-text-field
-              ref={descriptionRef}
               id="description"
               label="Descripción"
               value={description}
+              onInput={(e) => setDescription(e.target.value)}
               textarea
               required
           ></md-outlined-text-field>
