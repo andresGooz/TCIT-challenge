@@ -12,12 +12,10 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<CreatePost />} /> {/* formulario */}
-          <Route path="/posts/create" element={<CreatePost />} /> {/* formulario */}
-          <Route path="/posts/delete" element={<DeletePost />} /> {/* formulario */}
-          <Route path="/post/:postId" element={<GetDetailsPost />} /> {/* filtro */}
-          <Route path="/post/name/:postName" element={<GetDetailsPost />} /> {/* filtro */}
-          <Route path="/posts" element={<ListPost />} /> {/* lista */}
+          <Route index element={<CreatePost />} />
+          <Route path="/posts/create" element={<CreatePost />} />
+          <Route path="/post/:postId" element={<GetDetailsPost />} />
+          <Route path="/posts" element={<ListPost />} />
           <Route path="/NotFound" element={<NotFound />} />
           <Route path="*" element={<NotFound />} />
         </Route>
