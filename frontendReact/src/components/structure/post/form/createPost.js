@@ -1,10 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '@material/web/textfield/outlined-text-field';
 import '@material/web/button/filled-button';
 import '@material/web/icon/icon';
 import 'material-icons/iconfont/material-icons.css';
+import { createPost, resetPost } from '../../../behavior/post/createPostSlicer'; // Importa las acciones
+import {  useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-function CreatePostForm({ handleSubmit, name, setName, description, setDescription }) {
+
+function CreatePostForm() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const postData = { name, description };
+        const resultAction = await dispatch(createPost(postData));
+        if (createPost.fulfilled.match(resultAction)) {
+            setName('');
+            setDescription('');
+            dispatch(resetPost());
+            navigate(`/post/${resultAction.payload.id}`);
+        }
+    };
+
   return (
     <form onSubmit={handleSubmit}>
       <div>

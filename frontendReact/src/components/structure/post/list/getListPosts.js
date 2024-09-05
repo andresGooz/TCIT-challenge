@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function PostList({ posts, onPostClick }) {
+function PostList({ posts }) {
   return (
     <ul className="mdc-list">
       {posts.map(post => (
         <li key={post.id} className="mdc-list-item" tabIndex="0">
-          <Link to={`/post/${post.id}`} onClick={() => onPostClick(post.id)}>
+          <Link to={`/post/${post.id}`} onClick={() => console.log('ok')}>
             <span className="mdc-list-item__text">{post.id}</span><br />
             <span className="mdc-list-item__text">{post.name}</span><br />
             <span className="mdc-list-item__text">{post.description}</span>

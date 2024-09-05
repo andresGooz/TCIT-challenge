@@ -27,14 +27,11 @@ function ListPost() {
     fetchPosts();
   }, [dispatch]);
 
-  const handlePostClick = (postId) => {
-    console.log(postId);
-  };
   return (
     <div>
       <h2>Posts</h2>
       <LocalFilter posts={posts} onFilteredPostsChange={setFilteredPosts} />
-      <PostList posts={filteredPosts} onPostClick={handlePostClick} />
+      <PostList posts={filteredPosts} />
     </div>
   );
 }
