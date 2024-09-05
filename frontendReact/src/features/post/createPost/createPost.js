@@ -12,9 +12,6 @@ function CreatePost() {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
 
-  const nameRef = useRef();
-  const descriptionRef = useRef();
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -49,19 +46,19 @@ function CreatePost() {
       <form onSubmit={handleSubmit}>
         <div>
           <md-outlined-text-field
-              ref={nameRef}
               id="name"
               label="Nombre"
               value={name}
+              onInput={(e) => setName(e.target.value)}
               required
           ></md-outlined-text-field>
         </div>
         <div>
           <md-outlined-text-field
-              ref={descriptionRef}
               id="description"
               label="Descripción"
               value={description}
+              onInput={(e) => setDescription(e.target.value)}
               textarea
               required
           ></md-outlined-text-field>
