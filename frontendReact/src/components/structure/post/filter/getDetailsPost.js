@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { listPost, resetPost } from './listPostSlicer';
+import { getDetailsPost, resetPost } from '../../../behavior/post/getDetailsPostSlicer';
 import '@material/web/textfield/outlined-text-field';
 import '@material/web/button/filled-button';
 import '@material/web/icon/icon';
 import 'material-icons/iconfont/material-icons.css';
 import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import DeletePost from '../form/deletePost';
 
 
-function ListPost() {
+function GetDetailsPost() {
+  const { postId, postName } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { post, status, error } = useSelector((state) => state.post);
@@ -17,8 +20,8 @@ function ListPost() {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const resultData = await dispatch(listPost());      
-      if (listPost.fulfilled.match(resultData)) {
+      const resultData = await dispatch(getDetailsPost({postId, postName}));      
+      if (getDetailsPost.fulfilled.match(resultData)) {
         setPosts(resultData.payload);
       } else {
         console.error("Failed to fetch posts");
@@ -35,21 +38,26 @@ function ListPost() {
   }, [status, post, dispatch, navigate]);
 
   return (
+    <>
     <div>
-      <h2>Posts</h2>
+      <h2>Post detail</h2>
       <ul className="mdc-list">
-        {posts.map(post => (
-          <li key={post.id} className="mdc-list-item" tabIndex="0">
-            <Link to={`/post/${post.id}`}>
-              <span className="mdc-list-item__text">{post.id}</span><br/>
-              <span className="mdc-list-item__text">{post.name}</span><br/>
-              <span className="mdc-list-item__text">{post.description}</span>
-            </Link>
-          </li>
-        ))}
+        <li key={posts.id} className="mdc-list-item" tabIndex="0">
+          <Link to={`/post/${posts.id}`}>
+            <span className="mdc-list-item__text">{posts.id}</span><br/>
+            <span className="mdc-list-item__text">{posts.name}</span><br/>
+            <span className="mdc-list-item__text">{posts.description}</span>
+          </Link>
+          <div>
+            < DeletePost postId={posts.id} />
+          </div>
+        </li>
       </ul>
+      
     </div>
+    </>
   );
 }
 
-export default ListPost;
+export default GetDetailsPost;
+

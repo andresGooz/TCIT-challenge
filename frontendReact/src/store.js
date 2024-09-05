@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
-import postReducer from './features/post/createPost/createPostSlicer';
-import postGetDetailsReducer from './features/post/getPost/getDetailsPostSlicer';
-import postDeleteReducer from './features/post/deletePost/deletePostSlicer';
-import postListReducer from './features/post/listPost/listPostSlicer'
+import postReducer from './components/behavior/post/createPostSlicer';
+import postGetDetailsReducer from './components/behavior/post/getDetailsPostSlicer';
+import postDeleteReducer from './components/behavior/post/deletePostSlicer';
+import postListReducer from './components/behavior/post/listPostSlicer';
 
 
 const store = configureStore({
