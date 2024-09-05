@@ -8,19 +8,18 @@ import '@material/web/icon/icon';
 import 'material-icons/iconfont/material-icons.css';
 import { Link } from 'react-router-dom';
 
+
 function ListPost() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { post, status, error } = useSelector((state) => state.post);
-  const [posts, setPosts] = useState([]); // Estado local para almacenar posts
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const resultData = await dispatch(listPost());
-      console.log(resultData);
-      
+      const resultData = await dispatch(listPost());      
       if (listPost.fulfilled.match(resultData)) {
-        setPosts(resultData.payload); // Actualiza el estado local con los posts
+        setPosts(resultData.payload);
       } else {
         console.error("Failed to fetch posts");
       }

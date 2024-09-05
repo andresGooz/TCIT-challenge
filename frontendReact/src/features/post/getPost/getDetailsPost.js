@@ -20,9 +20,7 @@ function GetDetailsPost() {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const resultData = await dispatch(getDetailsPost({postId, postName}));
-      console.log(resultData);
-      
+      const resultData = await dispatch(getDetailsPost({postId, postName}));      
       if (getDetailsPost.fulfilled.match(resultData)) {
         setPosts(resultData.payload);
       } else {
