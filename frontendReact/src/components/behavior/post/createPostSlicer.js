@@ -5,14 +5,10 @@ export const createPost = createAsyncThunk(
   'post/createPost',
   async (postData, { rejectWithValue }) => {
     try {
-      const username = process.env.REACT_APP_BACKEND_API_USERNAME;
-      const password = process.env.REACT_APP_BACKEND_API_PASSWORD;
-      const basicAuth = 'Basic ' + btoa(`${username}:${password}`);
       const response = await fetch(process.env.REACT_APP_BACKEND_API_DOMAIN_URL+'/posts', {
           method: 'POST',
           headers: {
-          'Content-Type': 'application/json',
-          'Authorization': basicAuth
+          'Content-Type': 'application/json'
           },
           body: JSON.stringify(postData),
       });
