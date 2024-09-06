@@ -17,14 +17,10 @@ export const getDetailsPost = createAsyncThunk(
   async ({ postId, postName}, { rejectWithValue }) => {
     try {
       const url = getPostUrl(postId, postName);
-      const username = process.env.REACT_APP_BACKEND_API_USERNAME;
-      const password = process.env.REACT_APP_BACKEND_API_PASSWORD;
-      const basicAuth = 'Basic ' + btoa(`${username}:${password}`);
       const response = await fetch(url, {
           method: 'GET',
           headers: {
-          'Content-Type': 'application/json',
-          'Authorization': basicAuth
+          'Content-Type': 'application/json'
           }
       });
 
